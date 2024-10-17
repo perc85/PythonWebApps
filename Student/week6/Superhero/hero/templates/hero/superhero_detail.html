@@ -1,0 +1,16 @@
+{% extends 'hero/superhero_theme.html' %}
+{% load static %}
+
+{% block content %}
+<h1 class="mt-4 text-center">{{ object.name }}</h1>
+<img src="{% static 'images/' %}{{ object.image }}" alt="{{ object.name }}" class="img-fluid w-50 d-block mx-auto">
+<p><strong>Identity:</strong> {{ object.identity }}</p>
+<p><strong>Description:</strong> {{ object.description }}</p>
+<p><strong>Strength:</strong> {{ object.strength }}</p>
+<p><strong>Weakness:</strong> {{ object.weakness }}</p>
+<div class="pb-5">
+    <a href="{% url 'superhero_edit' object.pk %}" class="btn btn-secondary">Edit</a>
+    <a href="{% url 'superhero_delete' object.pk %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'superhero_list' %}" class="btn btn-link">Back to List</a>
+</div>
+{% endblock %}
