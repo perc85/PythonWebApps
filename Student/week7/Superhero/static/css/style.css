@@ -1,0 +1,17 @@
+.custom-navbar .custom-navbar-brand {
+    text-align: center;
+    width: 100%;
+}
+
+.custom-navbar .auth-buttons {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.custom-navbar .custom-btn {
+    padding: 5px 10px;
+}

@@ -1,0 +1,12 @@
+{% extends 'hero/superhero_theme.html' %}
+{% load static %}
+
+{% block content %}
+<h1 class="mt-4">Delete Superhero</h1>
+<p>Are you sure you want to delete "{{ object.name }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Confirm Delete</button>
+    <a href="{% url 'superhero_detail' object.pk %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

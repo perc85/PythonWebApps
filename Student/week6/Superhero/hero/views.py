@@ -36,3 +36,5 @@ class SuperheroDeleteView(DeleteView):
     template_name = 'hero/superhero_confirm_delete.html'
     success_url = reverse_lazy('superhero_list')
 
+
+
