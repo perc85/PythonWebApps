@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-t)8-pg+rsd6$!58b^-%@qp(r9=(71m*1b7l$p+@+#as-456!dm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['seashell-app-7byo8.ondigitalocean.app']
 
 
 # Application definition
