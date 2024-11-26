@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-t)8-pg+rsd6$!58b^-%@qp(r9=(71m*1b7l$p+@+#as-456!dm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['seashell-app-7byo8.ondigitalocean.app']
+ALLOWED_HOSTS = ['seashell-app-7byo8.ondigitalocean.app', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -70,18 +70,31 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Superhero_articles.wsgi.application'
+
+WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'superhero_data',
+        'USER': 'postgres',
+        'PASSWORD': '91029102',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
+
 
 
 # Password validation
