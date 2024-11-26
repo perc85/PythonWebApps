@@ -84,16 +84,23 @@ WSGI_APPLICATION = 'config.wsgi.application'
 #     }
 # }
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'superhero_data',
-        'USER': 'postgres',
-        'PASSWORD': '91029102',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': os.getenv('POSTGRES_DB'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+        'HOST': os.getenv('POSTGRES_HOST'),
+        'PORT': os.getenv('POSTGRES_PORT'),
     }
 }
+DATABASES['default']['OPTIONS'] = {
+    'sslmode': 'require'
+}
+
+
+
 
 
 
