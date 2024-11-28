@@ -6,7 +6,7 @@ from django.db import migrations, models
 
 
 def add_default_heroes(apps, schema_editor):
-    Superhero = apps.get_model('your_app_name', 'Superhero')
+    Superhero = apps.get_model('articles', 'Superhero')
     default_heroes = [
         {
             "name": "Superman",
