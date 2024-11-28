@@ -48,7 +48,7 @@ services:
   instance_size_slug: apps-s-1vcpu-0.5gb
   name: pythonwebapps-student-02-profil2
   run_command: gunicorn --worker-tmp-dir /dev/shm config.wsgi
-  source_dir: Student/week11/Superhero_articles
+  source_dir: Student/week12/Superhero_articles
 static_sites:
 - environment_slug: html
   github:
@@ -56,4 +56,4 @@ static_sites:
     deploy_on_push: true
     repo: perc85/PythonWebApps
   name: pythonwebapps-student-02-profile
-  source_dir: Student/week11/Superhero_articles/static
+  source_dir: Student/week12/Superhero_articles/static
