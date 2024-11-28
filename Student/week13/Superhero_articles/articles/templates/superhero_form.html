@@ -74,9 +74,14 @@
 </div>
 
 <script type="text/template" id="empty_form_template">
-    <div class="form-group mb-3">
-        <label for="id_images-__prefix__-image">Image:</label>
-        <input type="file" name="images-__prefix__-image" id="id_images-__prefix__-image" class="form-control">
+    <div class="form-group mb-3 dynamic-form">
+        <div class="d-flex align-items-center">
+            <div class="flex-grow-1">
+                <label for="id_images-__prefix__-image">Image:</label>
+                <input type="file" name="images-__prefix__-image" id="id_images-__prefix__-image" class="form-control">
+            </div>
+            <button type="button" class="btn btn-danger btn-sm ms-2 remove-image">Remove</button>
+        </div>
     </div>
 </script>
 
@@ -96,6 +101,18 @@
 
             totalForms.value = formNum + 1;
             console.log(`Added form #${formNum}, Total forms now: ${totalForms.value}`);
+        });
+
+        formContainer.addEventListener('click', function (event) {
+            if (event.target && event.target.classList.contains('remove-image')) {
+                const formGroup = event.target.closest('.dynamic-form');
+                formGroup.remove();
+
+                let formNum = parseInt(totalForms.value) - 1;
+                totalForms.value = formNum;
+
+                console.log(`Removed a form. Total forms now: ${totalForms.value}`);
+            }
         });
     });
 </script>
