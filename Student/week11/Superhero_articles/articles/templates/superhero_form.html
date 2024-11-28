@@ -1,0 +1,13 @@
+{% extends 'theme.html' %}
+
+{% block title %}{{ form.instance.name|default:"Add Superhero" }}{% endblock %}
+
+{% block content %}
+<h1>{{ form.instance.name|default:"Add Superhero" }}</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+<a href="{% url 'superhero_list' %}" class="btn btn-secondary mt-3">Cancel</a>
+{% endblock %}

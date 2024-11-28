@@ -1,0 +1,26 @@
+{% extends 'theme.html' %}
+
+{% block title %}{{ superhero.name }}{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1 class="mb-4">{{ superhero.name }}</h1>
+    {% if superhero.image %}
+    <img src="{{ superhero.image.url }}" class="img-thumbnail mb-4" alt="{{ superhero.name }}" style="max-width: 400px; height: auto;">
+    {% endif %}
+</div>
+<div class="text-center">
+    <p><strong>Secret Identity:</strong> {{ superhero.identity }}</p>
+    <p><strong>Description:</strong> {{ superhero.description }}</p>
+    <p><strong>Strength:</strong> {{ superhero.strength }}</p>
+    <p><strong>Weakness:</strong> {{ superhero.weakness }}</p>
+</div>
+
+<div class="text-center mt-4">
+    {% if superhero.user == request.user %}
+    <a href="{% url 'superhero_update' superhero.pk %}" class="btn btn-warning mx-2">Edit</a>
+    <a href="{% url 'superhero_delete' superhero.pk %}" class="btn btn-danger mx-2">Delete</a>
+    {% endif %}
+    <a href="{% url 'superhero_list' %}" class="btn btn-secondary mx-2">Back to List</a>
+</div>
+{% endblock %}

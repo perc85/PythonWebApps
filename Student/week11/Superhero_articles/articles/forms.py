@@ -1,5 +1,5 @@
 from django import forms
-from .models import Article, Investigator
+from .models import Article, Investigator, Superhero
 
 class ArticleForm(forms.ModelForm):
     class Meta:
@@ -27,3 +27,9 @@ class InvestigatorForm(forms.ModelForm):
             'name': 'Investigator Name',
             'biography': 'Your Biography',
         }
+
+
+class SuperheroForm(forms.ModelForm):
+    class Meta:
+        model = Superhero
+        fields = ['name', 'identity', 'description', 'strength', 'weakness', 'image']

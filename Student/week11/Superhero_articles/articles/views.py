@@ -4,8 +4,8 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from .models import Article, Investigator
-from .forms import ArticleForm, InvestigatorForm
+from .models import Article, Investigator, Superhero
+from .forms import ArticleForm, InvestigatorForm, SuperheroForm
 from django.contrib import messages
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -155,3 +155,52 @@ def redirect_after_login(request):
         return redirect('investigator_list')
     except Investigator.DoesNotExist:
         return redirect('investigator_profile')
+
+
+def superhero_list(request):
+    superheroes = Superhero.objects.all()
+    return render(request, 'superhero_list.html', {'superheroes': superheroes})
+
+
+def superhero_detail(request, pk):
+    superhero = get_object_or_404(Superhero, pk=pk)
+    return render(request, 'superhero_detail.html', {'superhero': superhero})
+
+
+@login_required
+def superhero_create(request):
+    if request.method == 'POST':
+        form = SuperheroForm(request.POST, request.FILES)
+        if form.is_valid():
+            superhero = form.save(commit=False)
+            superhero.user = request.user
+            superhero.save()
+            messages.success(request, "Superhero added successfully!")
+            return redirect('superhero_list')
+    else:
+        form = SuperheroForm()
+    return render(request, 'superhero_form.html', {'form': form})
+
+
+@login_required
+def superhero_update(request, pk):
+    superhero = get_object_or_404(Superhero, pk=pk, user=request.user)
+    if request.method == 'POST':
+        form = SuperheroForm(request.POST, request.FILES, instance=superhero)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Superhero updated successfully!")
+            return redirect('superhero_detail', pk=superhero.pk)
+    else:
+        form = SuperheroForm(instance=superhero)
+    return render(request, 'superhero_form.html', {'form': form})
+
+
+@login_required
+def superhero_delete(request, pk):
+    superhero = get_object_or_404(Superhero, pk=pk, user=request.user)
+    if request.method == 'POST':
+        superhero.delete()
+        messages.success(request, "Superhero deleted successfully!")
+        return redirect('superhero_list')
+    return render(request, 'superhero_confirm_delete.html', {'superhero': superhero})

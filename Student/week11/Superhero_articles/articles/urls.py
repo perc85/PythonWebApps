@@ -16,4 +16,9 @@ urlpatterns = [
     path('investigators/<int:pk>/', views.investigator_detail, name='investigator_detail'),
     path('redirect_after_login/', views.redirect_after_login, name='redirect_after_login'),
     path('investigators/<int:pk>/delete/', views.investigator_delete, name='investigator_delete'),
+    path('superheroes/', views.superhero_list, name='superhero_list'),
+    path('superheroes/<int:pk>/', views.superhero_detail, name='superhero_detail'),
+    path('superheroes/new/', views.superhero_create, name='superhero_create'),
+    path('superheroes/<int:pk>/edit/', views.superhero_update, name='superhero_update'),
+    path('superheroes/<int:pk>/delete/', views.superhero_delete, name='superhero_delete'),
 ]
