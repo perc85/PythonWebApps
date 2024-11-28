@@ -1,0 +1,33 @@
+{% extends 'theme.html' %}
+
+{% block title %}Investigators{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Investigators</h1>
+    <div class="row">
+        {% for investigator in investigators %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ investigator.name }}</h5>
+                    <p class="card-text">{{ investigator.biography|truncatewords:10 }}</p>
+                    <p class="text-muted">by {{ investigator.user.username }}</p>
+                    <a href="{% url 'investigator_detail' investigator.pk %}" class="btn btn-primary btn-sm">View Profile</a>
+                    {% if user.is_authenticated and investigator.user == request.user %}
+                    <a href="{% url 'investigator_profile' %}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{% url 'investigator_delete' investigator.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% if user.is_authenticated and not user_investigator %}
+    <div class="text-center mt-4">
+        <a href="{% url 'investigator_profile' %}" class="btn btn-success">Create Investigator Profile</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
