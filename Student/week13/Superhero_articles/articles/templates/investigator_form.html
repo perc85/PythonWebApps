@@ -1,0 +1,27 @@
+{% extends 'theme.html' %}
+
+{% block title %}{% if investigator %}Edit Investigator Profile{% else %}Create Investigator Profile{% endif %}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h2 class="text-center">{% if investigator %}Edit Investigator Profile{% else %}Create Investigator Profile{% endif %}</h2>
+        </div>
+        <div class="card-body">
+            <form method="post" class="needs-validation" novalidate>
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    {{ form.name }}
+                </div>
+                <div class="mb-3">
+                    <label for="biography" class="form-label">Biography</label>
+                    {{ form.biography }}
+                </div>
+                <button type="submit" class="btn btn-success w-100">{% if investigator %}Save Changes{% else %}Create Profile{% endif %}</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

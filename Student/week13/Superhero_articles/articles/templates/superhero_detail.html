@@ -1,0 +1,44 @@
+{% extends 'theme.html' %}
+
+{% block title %}{{ superhero.name }}{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1 class="mb-4">{{ superhero.name }}</h1>
+    {% if superhero.images.all %}
+    <div id="superheroCarousel" class="carousel slide" data-bs-ride="carousel" style="max-width: 600px; margin: auto;">
+        <div class="carousel-inner">
+            {% for image in superhero.images.all %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <img src="{{ image.image.url }}" class="d-block w-100 img-fluid" alt="{{ superhero.name }}" style="max-height: 500px; object-fit: contain;">
+            </div>
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#superheroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#superheroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    {% else %}
+    <p>No images available for this superhero.</p>
+    {% endif %}
+</div>
+<div class="text-center">
+    <p><strong>Secret Identity:</strong> {{ superhero.identity }}</p>
+    <p><strong>Description:</strong> {{ superhero.description }}</p>
+    <p><strong>Strength:</strong> {{ superhero.strength }}</p>
+    <p><strong>Weakness:</strong> {{ superhero.weakness }}</p>
+</div>
+
+<div class="text-center mt-4">
+    {% if superhero.user == request.user %}
+    <a href="{% url 'superhero_update' superhero.pk %}" class="btn btn-warning mx-2">Edit</a>
+    <a href="{% url 'superhero_delete' superhero.pk %}" class="btn btn-danger mx-2">Delete</a>
+    {% endif %}
+    <a href="{% url 'superhero_list' %}" class="btn btn-secondary mx-2">Back to List</a>
+</div>
+{% endblock %}

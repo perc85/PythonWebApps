@@ -1,0 +1,31 @@
+{% extends 'theme.html' %}
+
+{% block title %}All Articles{% endblock %}
+
+{% block content %}
+<h2 class="text-center my-4">Articles</h2>
+
+<div class="row">
+    {% for article in articles %}
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'article_detail' article.pk %}">{{ article.title }}</a>
+                    </h5>
+                    <p class="card-text">
+                        <small class="text-muted">by {{ article.author.username }}</small>
+                    </p>
+                    <a href="{% url 'article_detail' article.pk %}" class="btn btn-primary">Read More</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% if user.is_authenticated %}
+    <div class="text-center mt-4">
+        <a href="{% url 'article_create' %}" class="btn btn-success">Create New Article</a>
+    </div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'theme.html' %}
+
+{% block title %}Delete Investigator Profile{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-danger text-white">
+            <h2 class="text-center">Delete Investigator Profile</h2>
+        </div>
+        <div class="card-body text-center">
+            <p>Are you sure you want to delete your investigator profile, <strong>{{ investigator.name }}</strong>?</p>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                <a href="{% url 'investigator_list' %}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

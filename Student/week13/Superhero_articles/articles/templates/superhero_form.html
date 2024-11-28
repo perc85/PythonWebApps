@@ -1,0 +1,110 @@
+{% extends 'theme.html' %}
+{% load static %}
+{% load form_tags %}
+
+{% block title %}{{ form.instance.name|default:"Add Superhero" }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white text-center">
+            <h2>{{ form.instance.name|default:"Add Superhero" }}</h2>
+        </div>
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <!-- Display form errors -->
+                {% if form.errors or formset.non_form_errors %}
+                    <div class="alert alert-danger">
+                        <ul>
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in formset.non_form_errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                
+                <!-- Superhero Fields -->
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">{{ form.name.label }}</label>
+                        {{ form.name|add_class:"form-control" }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">{{ form.identity.label }}</label>
+                        {{ form.identity|add_class:"form-control" }}
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">{{ form.description.label }}</label>
+                    {{ form.description|add_class:"form-control" }}
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">{{ form.strength.label }}</label>
+                        {{ form.strength|add_class:"form-control" }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">{{ form.weakness.label }}</label>
+                        {{ form.weakness|add_class:"form-control" }}
+                    </div>
+                </div>
+
+                <!-- Images Formset -->
+                <h3 class="mt-4">Upload Images:</h3>
+                {{ formset.management_form }}
+                <div id="formset_container">
+                    {% for form in formset %}
+                        <div class="form-group mb-3">
+                            {{ form.image.label_tag }}
+                            {{ form.image|add_class:"form-control" }}
+                        </div>
+                    {% endfor %}
+                </div>
+                <button type="button" id="add_more_images" class="btn btn-outline-secondary">Add More Images</button>
+
+                <!-- Save Button -->
+                <div class="d-flex justify-content-end mt-4">
+                    <button type="submit" class="btn btn-primary">Save Superhero</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Empty Form Template -->
+<script type="text/template" id="empty_form_template">
+    <div class="form-group mb-3">
+        <label for="id_images-__prefix__-image">Image:</label>
+        <input type="file" name="images-__prefix__-image" id="id_images-__prefix__-image" class="form-control">
+    </div>
+</script>
+
+<!-- JavaScript for dynamic formset -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const addButton = document.getElementById('add_more_images');
+        const formContainer = document.getElementById('formset_container');
+        const totalForms = document.getElementById('id_images-TOTAL_FORMS'); // Updated prefix
+
+        addButton.addEventListener('click', function () {
+            let formNum = parseInt(totalForms.value); // Current number of forms
+            let emptyFormHtml = document.getElementById('empty_form_template').innerHTML.replace(/__prefix__/g, formNum);
+            
+            // Create a new div and append the form
+            let newFormDiv = document.createElement('div');
+            newFormDiv.innerHTML = emptyFormHtml;
+            formContainer.appendChild(newFormDiv);
+
+            // Increment total forms
+            totalForms.value = formNum + 1;
+            console.log(`Added form #${formNum}, Total forms now: ${totalForms.value}`);
+        });
+    });
+</script>
+{% endblock %}
