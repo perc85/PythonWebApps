@@ -1,0 +1,47 @@
+{% extends 'theme.html' %}
+
+{% block title %}{{ form.instance.name|default:"Add Superhero" }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white text-center">
+            <h2>{{ form.instance.name|default:"Add Superhero" }}</h2>
+        </div>
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group mb-4">
+                    <label for="name" class="form-label"><strong>Name</strong></label>
+                    <input type="text" name="name" class="form-control" id="name" value="{{ form.name.value }}">
+                </div>
+                <div class="form-group mb-4">
+                    <label for="identity" class="form-label"><strong>Secret Identity</strong></label>
+                    <input type="text" name="identity" class="form-control" id="identity" value="{{ form.identity.value }}">
+                </div>
+                <div class="form-group mb-4">
+                    <label for="description" class="form-label"><strong>Description</strong></label>
+                    <textarea name="description" class="form-control" id="description">{{ form.description.value }}</textarea>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="strength" class="form-label"><strong>Strength</strong></label>
+                    <input type="text" name="strength" class="form-control" id="strength" value="{{ form.strength.value }}">
+                </div>
+                <div class="form-group mb-4">
+                    <label for="weakness" class="form-label"><strong>Weakness</strong></label>
+                    <input type="text" name="weakness" class="form-control" id="weakness" value="{{ form.weakness.value }}">
+                </div>
+                <div class="form-group mb-4">
+                    <label for="image" class="form-label"><strong>Upload Image</strong></label>
+                    <input type="file" name="image" class="form-control" id="image">
+                </div>
+                <button type="submit" class="btn btn-success w-100 py-2">Save Superhero</button>
+            </form>
+            <div class="text-center mt-3">
+                <a href="{% url 'superhero_list' %}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,55 @@
+{% extends 'theme.html' %}
+
+{% block title %}Investigator Profile{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-sm mb-5">
+        <div class="card-header bg-primary text-white">
+            <h2 class="text-center">{{ investigator.name }}</h2>
+        </div>
+        <div class="card-body">
+            <p><strong>Biography:</strong> {{ investigator.biography }}</p>
+            <p><strong>Associated User:</strong> {{ investigator.user.username }}</p>
+            {% if investigator.user == request.user %}
+            <a href="{% url 'investigator_profile' %}" class="btn btn-warning">Edit Profile</a>
+            {% endif %}
+            <a href="{% url 'investigator_list' %}" class="btn btn-secondary">Back to Investigators</a>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-secondary text-white">
+            <h3 class="text-center">List of Articles</h3>
+        </div>
+        <div class="card-body">
+            {% if articles %}
+                <div class="row">
+                    {% for article in articles %}
+                    <div class="col-md-6 mb-4">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="{% url 'article_detail' article.pk %}">{{ article.title }}</a>
+                                </h5>
+                                <p class="card-text">
+                                    <small class="text-muted">Published by {{ article.author.username }}</small>
+                                </p>
+                                <a href="{% url 'article_detail' article.pk %}" class="btn btn-primary">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-muted text-center">No articles found for this user.</p>
+            {% endif %}
+        </div>
+        {% if investigator.user == request.user %}
+        <div class="text-center mb-4">
+            <a href="{% url 'article_create' %}" class="btn btn-success">Add New Article</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

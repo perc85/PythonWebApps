@@ -1,0 +1,5 @@
+id,user_id,name,identity,description,strength,weakness,image,is_default
+1,,Superman,Clark Kent,Man of Steel with superhuman powers.,Super strength and flight,Kryptonite,default_superheroes/superman.jpg,True
+2,,Batman,Bruce Wayne,"The Dark Knight, a genius detective and martial artist.",Peak human abilities and intelligence,Human limitations,default_superheroes/batman.jpg,True
+3,,Wonder Woman,Diana Prince,Amazonian warrior princess with divine powers.,Superhuman strength and agility,Loss of divine favor,default_superheroes/wonder_woman.jpg,True
+6,5,Spider Man,None,None,None,None,superheroes/spiderman.jpg,False

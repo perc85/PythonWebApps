@@ -61,6 +61,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='superhero',
             name='user',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True),
         ),
     ]

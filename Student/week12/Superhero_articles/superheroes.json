@@ -1,0 +1,46 @@
+[
+    {
+        "id": 1,
+        "user_id": null,
+        "name": "Superman",
+        "identity": "Clark Kent",
+        "description": "Man of Steel with superhuman powers.",
+        "strength": "Super strength and flight",
+        "weakness": "Kryptonite",
+        "image": "default_superheroes/superman.jpg",
+        "is_default": true
+    },
+    {
+        "id": 2,
+        "user_id": null,
+        "name": "Batman",
+        "identity": "Bruce Wayne",
+        "description": "The Dark Knight, a genius detective and martial artist.",
+        "strength": "Peak human abilities and intelligence",
+        "weakness": "Human limitations",
+        "image": "default_superheroes/batman.jpg",
+        "is_default": true
+    },
+    {
+        "id": 3,
+        "user_id": null,
+        "name": "Wonder Woman",
+        "identity": "Diana Prince",
+        "description": "Amazonian warrior princess with divine powers.",
+        "strength": "Superhuman strength and agility",
+        "weakness": "Loss of divine favor",
+        "image": "default_superheroes/wonder_woman.jpg",
+        "is_default": true
+    },
+    {
+        "id": 6,
+        "user_id": 5,
+        "name": "Spider Man",
+        "identity": "None",
+        "description": "None",
+        "strength": "None",
+        "weakness": "None",
+        "image": "superheroes/spiderman.jpg",
+        "is_default": false
+    }
+]
