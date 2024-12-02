@@ -43,9 +43,9 @@
                     <li class="nav-item">
                         <form method="post" action="{% url 'logout' %}" class="d-inline">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-outline-danger nav-link">Logout</button>
+                            <button type="submit" class="nav-link btn btn-link text-decoration-none">Logout</button>
                         </form>
-                    </li>                    
+                    </li>                  
                     {% else %}
                         {% if request.resolver_match.url_name != 'login' %}
                             <li class="nav-item">
