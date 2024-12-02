@@ -29,11 +29,6 @@ def register(request):
     return render(request, 'registration/register.html', {'form': form})
 
 
-def custom_logout(request):
-    logout(request)
-    return redirect('article_list')
-
-
 def article_list(request):
     articles = Article.objects.all()
     return render(request, 'article_list.html', {'articles': articles})
@@ -53,7 +48,7 @@ def article_create(request):
             article.author = request.user
             article.save()
             messages.success(request, "Article created successfully!")
-            return redirect('article_detail', pk=article.pk)
+            return redirect('article_edit', pk=article.pk)
     else:
         form = ArticleForm()
     return render(request, 'article_form.html', {'form': form})
